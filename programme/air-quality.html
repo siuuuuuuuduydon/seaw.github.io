@@ -38,25 +38,22 @@
             </div>
     <div name="airvisual_widget" key="650a4be94cecf1ee99da6ee5" align="center" style="padding-top:50px;"></div>
     <script type="text/javascript" src="https://widget.iqair.com/script/widget_v3.0.js"></script>
-     <div  id='map'  style='height:380px;'  />  
-<script  src="https://maps.googleapis.com/maps/api/js"></script>  
-  
+              <div id="map" style="height:380px; width: 580px; margin-left: auto; margin-right: auto; margin-bottom: auto; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,.2);"/>  
+<link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
+<script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+
+
 <script>  
-      var  map  =  new  google.maps.Map(document.getElementById('map'),  {  
-                  center:  new  google.maps.LatLng(51.505,  -0.09),  
-                  mapTypeId:  google.maps.MapTypeId.ROADMAP,  
-                  zoom:  11  
-              });  
-  
-                              var  t  =  new  Date().getTime();  
-      var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
-                  getTileUrl:  function(coord,  zoom)  {  
-                            return  'https://tiles.aqicn.org/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=_TOKEN_ID_";  
-                  },  
-                  name:  "Air  Quality",  
-        });  
-  
-      map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
+    var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
+    var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
+    var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
+
+    var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";  
+    var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
+    var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
+
+    var  map  =  L.map('map').setView([15.642898414970267, 107.69300815632914],  5);  
+    map.addLayer(osmLayer).addLayer(waqiLayer);  
 </script>
     </body>
 </html>
